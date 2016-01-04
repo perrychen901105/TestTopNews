@@ -8,6 +8,8 @@
 
 #import "BYListBar.h"
 #import "ResortViewHeader.h"
+#import "UIButton+ResortItem.h"
+
 #define kDistanceBetweenItem 32
 #define kExtraPadding 15
 #define itemFont 13
@@ -59,6 +61,7 @@
     CGFloat itemW = [self calculateSizeWithFont:itemFont Text:itemTitle.strTitle].size.width;
     UIButton *item = [[UIButton alloc] initWithFrame:CGRectMake(self.maxWidth, 0, itemW, self.frame.size.height)];
 //    item.tag = itemTitle.index;
+    item.itemID = itemTitle.strID;
     item.titleLabel.font = [UIFont systemFontOfSize:itemFont];
     [item setTitle:itemTitle.strTitle forState:0];
     [item setTitleColor:ColorListBarNormal forState:UIControlStateNormal];
@@ -68,7 +71,7 @@
              action:@selector(itemClick:)
    forControlEvents:UIControlEventTouchUpInside];
     
-    item.backgroundColor = [UIColor redColor];
+//    item.backgroundColor = [UIColor redColor];
     self.maxWidth += itemW+kDistanceBetweenItem;
     [self.btnLists addObject:item];
     [self addSubview:item];
@@ -90,7 +93,7 @@
             //TODO: 需要修改成匹配ID
             for (int i = 0; i < self.visibleItemList.count; i++) {
                 ResortItem *curItem = self.visibleItemList[i];
-                if ([curItem.strID isEqualToString:sender.titleLabel.text]) {
+                if ([curItem.strID isEqualToString:sender.itemID]) {
                     self.listBarItemClickBlock(curItem,[self findIndexOfListsWithID:curItem]);
                     
                     break;
@@ -102,7 +105,7 @@
     NSInteger intSelect = 0;
     for (int i = 0; i < self.visibleItemList.count; i++) {
         ResortItem *curItem = self.visibleItemList[i];
-        if ([curItem.strID isEqualToString:sender.titleLabel.text]) {
+        if ([curItem.strID isEqualToString:sender.itemID]) {
             intSelect = [self findIndexOfListsWithID:curItem];
             break;
         }
@@ -183,7 +186,7 @@
             [self switchPositionWithItemName:item index:self.visibleItemList.count-1];
             break;
         case FromTopToBottomHead:
-            if ([self.btnSelect.titleLabel.text isEqualToString:item.strTitle]) {
+            if ([self.btnSelect.itemID isEqualToString:item.strID]) {
                 [self itemClick:self.btnLists[0]];
             }
 //            NSInteger intS = [self findIndexOfListsWithTitle:item];
@@ -203,7 +206,7 @@
             [self makeItemWithTitle:item];
             break;
         case FromTopToCenterHead:
-            if ([self.btnSelect.titleLabel.text isEqualToString:item.strTitle]) {
+            if ([self.btnSelect.itemID isEqualToString:item.strID]) {
                 [self itemClick:self.btnLists[0]];
             }
 //            NSInteger intS2 = [self findIndexOfListsWithTitle:item];

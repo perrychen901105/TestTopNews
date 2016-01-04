@@ -10,8 +10,10 @@
 
 #import "BYArrow.h"
 #import "BYDetailsList.h"
+#import "BYListItem.h"
 #import "BYDeleteBar.h"
 #import "BYScroller.h"
+#import "NSArray+Map.h"
 
 #define kListBarH 30
 #define kArrowW 40
@@ -54,31 +56,14 @@
         self.detailsList.opertionFromItemBlock = ^(animateType type, ResortItem *item, int index){
             NSLog(@"%d,%@,%d",type,item.strID,index);
             [unself.listBar operationFromBlock:type item:item index:index];
-            [unself popToPre];
+            if (topViewClick == type) {
+
+                [unself popToPre];
+            }
+           
         };
         [self.view addSubview:self.detailsList];
     }
-//    if (!self.listBar) {
-//        self.listBar = [[BYListBar alloc] initWithFrame:CGRectMake(0, 64.0f, kScreenW, kListBarH)];
-//        self.listBar.visibleItemList = listTop;
-//        self.listBar.arrowChange = ^(){
-//            if (unself.arrow.arrowBtnClick) {
-//                unself.arrow.arrowBtnClick();
-//            }
-//        };
-//        self.listBar.listBarItemClickBlock = ^(NSString *itemName , NSInteger itemIndex){
-//            [unself.detailsList itemRespondFromListBarClickWithItemName:itemName];
-//            //添加scrollview
-//            
-//            //移动到该位置
-////            unself.mainScroller.contentOffset =  CGPointMake(itemIndex * unself.mainScroller.frame.size.width, 0);
-//        };
-//        [self.view addSubview:self.listBar];
-//    }
-//    if (!self.deleteBar) {
-//        self.deleteBar = [[BYDeleteBar alloc] initWithFrame:CGRectMake(0, 64.0f + 2 * kBtnCancelTop + kBtnCancelHeight, kScreenW, kListBarH)];
-//        [self.view addSubview:self.deleteBar];
-//    }
     // Do any additional setup after loading the view.
 }
 
@@ -86,7 +71,19 @@
 {
     NSLog(@"the arr is %@",self.listTop);
     if (self.resortRefresh) {
-        self.resortRefresh(self.listTop);
+        self.listTop = (NSMutableArray *)[(NSArray *)self.detailsList.topView mapObjectsUsingBlock:^id(id obj, NSUInteger idx) {
+            BYListItem *itemObj = (BYListItem *)obj;
+            return itemObj.item;
+        }];
+        self.listBottom = (NSMutableArray *)[(NSArray *)self.detailsList.centerView mapObjectsUsingBlock:^id(id obj, NSUInteger idx) {
+            BYListItem *itemObj = (BYListItem *)obj;
+            return itemObj.item;
+        }];
+        self.listBottomTwo = (NSMutableArray *)[(NSArray *)self.detailsList.bottomView mapObjectsUsingBlock:^id(id obj, NSUInteger idx) {
+            BYListItem *itemObj = (BYListItem *)obj;
+            return itemObj.item;
+        }];
+        self.resortRefresh(self.listTop, self.listBottom, self.listBottomTwo);
     }
     CATransition *transition = [CATransition animation];
     transition.duration = 0.3f;

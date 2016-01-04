@@ -54,10 +54,7 @@
             item.strID = strT;
             [self.arrTop addObject:item];
         }
-
-        
     }
-    
     for ( int i = 0; i < 20; i++) {
         NSString *strT = [NSString stringWithFormat:@"CENTER%d",i+1];
         ResortItem *item = [ResortItem new];
@@ -75,9 +72,6 @@
         item.strID = strT;
         [self.arrBottom addObject:item];
     }
-//    self.arrTop = [[NSMutableArray alloc] initWithArray:@[@"TOP1",@"TOP2",@"TOP3",@"TOP4",@"TOP5",@"TOP6",@"TOP7",@"TOP8"]];
-//    self.arrCenter = [[NSMutableArray alloc] initWithArray:@[@"CENTER1",@"CENTER2",@"CENTER3",@"CENTER4",@"CENTER5",@"CENTER6",@"CENTER7",@"CENTER8",@"CENTER9",@"CENTER10",@"CENTER11",@"CENTER12",@"CENTER13",@"CENTER14",@"CENTER15",@"CENTER16",@"CENTER17",@"CENTER18",@"CENTER19",@"CENTER20"]];
-//    self.arrBottom = [[NSMutableArray alloc] initWithArray:@[@"BOTTOM1",@"BOTTOM2",@"BOTTOM3",@"BOTTOM4",@"BOTTOM5",@"BOTTOM6",@"BOTTOM7",@"BOTTOM8",@"BOTTOM9"]];
 
     __weak typeof(self) unself = self;
     self.listBar = [[BYListBar alloc] initWithFrame:CGRectMake(0, 64.0f, kScreenW-kArrowW, kListBarH)];
@@ -88,22 +82,16 @@
         //添加scrollview
         unself.itemSelect = item;
         //移动到该位置
-        NSLog(@"the select index is %d",itemIndex);
         unself.mainScroller.contentOffset =  CGPointMake(itemIndex * unself.mainScroller.frame.size.width, 0);
     };
     self.listBar.listBarAddItemBlock = ^(ResortItem *item, NSInteger itemIndex) {
-        NSLog(@"the item name add is %@, index is %d",item.strID,itemIndex);
         unself.mainScroller.contentSize = CGSizeMake(kScreenW*unself.arrTop.count,unself.mainScroller.frame.size.height);
         [unself addScrollViewWithItemName:item index:itemIndex];
     };
     self.listBar.listBarDeleteItemBlock = ^(ResortItem *item, NSInteger itemIndex) {
-        NSLog(@"the item name delete is %@, index is %d",item.strID,itemIndex);
-
         [unself removeScrollViewWithItemName:item index:itemIndex];
-        
     };
     self.listBar.listBarSwitchItemBlock = ^(NSInteger preIndex, NSInteger afterIndex) {
-        NSLog(@"the pre index is %d, the after index is %d",preIndex,afterIndex);
         [unself switchScrollViewWithPreIndex:preIndex afterIndex:afterIndex];
     };
     [self.view addSubview:self.listBar];
@@ -116,8 +104,6 @@
         [self.btnAdd setBackgroundColor:[UIColor blueColor]];
         [self.view addSubview:self.btnAdd];
     }
-    
-    NSLog(@"the view frame is %@",NSStringFromCGRect(self.view.frame));
     if (!self.mainScroller) {
         self.mainScroller = [[UIScrollView alloc] initWithFrame:CGRectMake(0, kListBarH+64.0f, kScreenW , self.view.frame.size.height-kListBarH-64.0f)];
         self.mainScroller.backgroundColor = [UIColor yellowColor];
@@ -131,7 +117,6 @@
         for (int i = 0; i < self.arrTop.count; i++) {
             [self addScrollViewWithItemName:self.arrTop[i] index:i];
         }
-        
     }
     // Do any additional setup after loading the view, typically from a nib.
 }
@@ -157,13 +142,13 @@
         vc.itemSelect = self.itemSelect;
     }
     // 可优化，将所有操作结果放在这里
-    vc.resortRefresh = ^(NSMutableArray *arrList) {
+    vc.resortRefresh = ^(NSMutableArray *arrListTop, NSMutableArray *arrListCenter, NSMutableArray *arrListBottom) {
         NSMutableArray *arrMulList = [self.childViewControllers mutableCopy];
         for (InfoDetailViewController *vc in self.childViewControllers) {
             [vc removeFromParentViewController];
         }
-        for (int i = 0; i < arrList.count; i++) {
-            ResortItem *itemOri = arrList[i];
+        for (int i = 0; i < arrListTop.count; i++) {
+            ResortItem *itemOri = arrListTop[i];
             for (InfoDetailViewController *vcDetail in arrMulList) {
                 if ([itemOri.strID isEqualToString:vcDetail.itemSelect.strID]) {
                     [self addChildViewController:vcDetail];
@@ -171,6 +156,9 @@
                 }
             }
         }
+        self.arrTop = arrListTop;
+        self.arrCenter = arrListCenter;
+        self.arrBottom = arrListBottom;
         [self loopSubViews];
     };
     [self.navigationController pushViewController:vc animated:NO];

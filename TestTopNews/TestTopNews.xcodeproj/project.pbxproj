@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		2A1DE5631C3A097500DCC7E7 /* NSArray+Map.m in Sources */ = {isa = PBXBuildFile; fileRef = 2A1DE5621C3A097500DCC7E7 /* NSArray+Map.m */; };
+		2A1DE5661C3A0DBE00DCC7E7 /* UIButton+ResortItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 2A1DE5651C3A0DBE00DCC7E7 /* UIButton+ResortItem.m */; };
 		2A93CEAF1C30D613003A0214 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 2A93CEAE1C30D613003A0214 /* main.m */; };
 		2A93CEB21C30D613003A0214 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 2A93CEB11C30D613003A0214 /* AppDelegate.m */; };
 		2A93CEB51C30D613003A0214 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2A93CEB41C30D613003A0214 /* ViewController.m */; };
@@ -25,6 +27,10 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		2A1DE5611C3A097500DCC7E7 /* NSArray+Map.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSArray+Map.h"; sourceTree = "<group>"; };
+		2A1DE5621C3A097500DCC7E7 /* NSArray+Map.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSArray+Map.m"; sourceTree = "<group>"; };
+		2A1DE5641C3A0DBE00DCC7E7 /* UIButton+ResortItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIButton+ResortItem.h"; sourceTree = "<group>"; };
+		2A1DE5651C3A0DBE00DCC7E7 /* UIButton+ResortItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIButton+ResortItem.m"; sourceTree = "<group>"; };
 		2A93CEAA1C30D613003A0214 /* TestTopNews.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TestTopNews.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		2A93CEAE1C30D613003A0214 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		2A93CEB01C30D613003A0214 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -97,6 +103,10 @@
 				2A93CEB41C30D613003A0214 /* ViewController.m */,
 				2A93CED81C30D9C1003A0214 /* ResortViewController.h */,
 				2A93CED91C30D9C1003A0214 /* ResortViewController.m */,
+				2A1DE5611C3A097500DCC7E7 /* NSArray+Map.h */,
+				2A1DE5621C3A097500DCC7E7 /* NSArray+Map.m */,
+				2A1DE5641C3A0DBE00DCC7E7 /* UIButton+ResortItem.h */,
+				2A1DE5651C3A0DBE00DCC7E7 /* UIButton+ResortItem.m */,
 				2A93CEB61C30D613003A0214 /* Main.storyboard */,
 				2A93CEB91C30D613003A0214 /* Assets.xcassets */,
 				2A93CEBB1C30D613003A0214 /* LaunchScreen.storyboard */,
@@ -207,10 +217,12 @@
 			files = (
 				2A93CED41C30D654003A0214 /* BYListBar.m in Sources */,
 				2A93CED61C30D654003A0214 /* BYScroller.m in Sources */,
+				2A1DE5631C3A097500DCC7E7 /* NSArray+Map.m in Sources */,
 				2A93CEB51C30D613003A0214 /* ViewController.m in Sources */,
 				2A93CEDA1C30D9C1003A0214 /* ResortViewController.m in Sources */,
 				2A93CEB21C30D613003A0214 /* AppDelegate.m in Sources */,
 				2C34BC6F1C391E9D00786B9A /* ResortItem.m in Sources */,
+				2A1DE5661C3A0DBE00DCC7E7 /* UIButton+ResortItem.m in Sources */,
 				2A93CED21C30D654003A0214 /* BYDeleteBar.m in Sources */,
 				2AC5E9F71C34C6CB004438A7 /* InfoDetailViewController.m in Sources */,
 				2A93CED11C30D654003A0214 /* BYArrow.m in Sources */,

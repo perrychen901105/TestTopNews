@@ -16,5 +16,5 @@
 
 @property (nonatomic,strong) BYListBar *listBar;
 @property (nonatomic,strong) ResortItem *itemSelect;
-@property (nonatomic,copy) void(^resortRefresh)(NSMutableArray *arrList);
+@property (nonatomic,copy) void(^resortRefresh)(NSMutableArray *arrListTop, NSMutableArray *arrListCenter, NSMutableArray *arrListBottom);
 @end
